@@ -1,4 +1,4 @@
-package com.infusion.kcd.cell
+package com.infusion.kcd.model
 
 enum class State {
     DEAD, ALIVE
