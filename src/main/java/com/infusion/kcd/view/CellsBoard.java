@@ -4,6 +4,7 @@ import com.infusion.kcd.model.Board;
 import com.infusion.kcd.model.State;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +12,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class CellsBoard extends Application {
 
@@ -54,6 +56,13 @@ public class CellsBoard extends Application {
             setColumns(board.getColumns());
             setRows(board.getRows());
             createElements(board);
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent t) {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            });
         }
 
         void setColumns(int newColumns) {
