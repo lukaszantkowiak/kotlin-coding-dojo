@@ -9,7 +9,6 @@ class GameController(initialBoard: Board) {
 
     private var board = initialBoard;
 
-
     fun start() {
         val cellsBoard = CellsBoard.getInstance();
         cellsBoard.updateState(board)
@@ -29,7 +28,7 @@ class GameController(initialBoard: Board) {
         cellsBoard.updateState(board)
     }
 
-    private fun simulateNextStep() {
+    internal fun simulateNextStep() {
         val newBoard = Board(board.rows, board.columns)
 
         for (i in 0..board.rows - 1) {
@@ -43,14 +42,14 @@ class GameController(initialBoard: Board) {
         board = newBoard
     }
 
-    private fun getCellState(currentState: State, liveNeighbours: Int): State {
+    internal fun getCellState(currentState: State, liveNeighbours: Int): State {
         return when (currentState) {
             State.ALIVE -> if (liveNeighbours in 2..3) return State.ALIVE else State.DEAD
             State.DEAD -> if (liveNeighbours == 3) return State.ALIVE else State.DEAD
         }
     }
 
-    private fun countLiveNeighbours(row: Int, column: Int): Int {
+    internal fun countLiveNeighbours(row: Int, column: Int): Int {
         var liveNeighbours = 0
 
         for (i in -1..1) {
@@ -65,11 +64,11 @@ class GameController(initialBoard: Board) {
         return liveNeighbours
     }
 
-    private fun mod(m: Int, n: Int): Int {
+    internal fun mod(m: Int, n: Int): Int {
         return if (m < 0) (m + n) % n else m % n
     }
 
-    private fun isAliveCell(): Boolean {
+    internal fun isAliveCell(): Boolean {
         for (i in 0..board.rows - 1) {
             for (j in 0..board.columns - 1) {
                 if (board.getState(i, j) == State.ALIVE) {
