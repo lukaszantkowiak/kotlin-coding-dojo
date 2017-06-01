@@ -1,31 +1,28 @@
 package com.infusion.kcd
 
+import com.infusion.kcd.controller.GameController
 import com.infusion.kcd.model.Board
-import com.infusion.kcd.model.State
-import com.infusion.kcd.view.CellsBoard
-
-class KotlinClass(val abcd: String) {
-    var abc: String;
-
-    init {
-        abc = JavaClass("aaaa").abc;
-    }
-
-    fun abcd(): String {
-        return abcd
-    }
-}
+import com.infusion.kcd.model.State.ALIVE
+import com.infusion.kcd.model.State.DEAD
+import java.util.*
 
 fun main(args: Array<String>) {
-    val instance = CellsBoard.getInstance()
-    val board1 = Board(1, 5);
-    board1.setState(0, 4, State.ALIVE);
-    instance.updateState(board1);
+    val rows = 20;
+    val columns = 22;
+    val board = Board(rows, columns)
+    val threshold = 0.4
+//    board.setState(2, 3, State.ALIVE)
+//    board.setState(2, 4, State.ALIVE)
+//    board.setState(2, 5, State.ALIVE)
 
-    Thread.sleep(5000)
+    val random = Random()
+    for (i in 0..rows - 1) {
+        for (j in 0..columns - 1) {
+            val state = if (random.nextDouble() < threshold) ALIVE else DEAD
+            board.setState(i, j, state);
+        }
+    }
 
-
-    val board2 = Board(5, 1);
-    board2.setState(4, 0, State.ALIVE);
-    instance.updateState(board2);
+    val gameController = GameController(board);
+    gameController.start()
 }

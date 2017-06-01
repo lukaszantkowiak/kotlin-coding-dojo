@@ -8,6 +8,6 @@ class Board(val rows: Int, val columns: Int) {
     }
 
     fun getState(row: Int, column: Int): State {
-        return cellBoard[column][row]
+        return cellBoard[row][column]
     }
 }

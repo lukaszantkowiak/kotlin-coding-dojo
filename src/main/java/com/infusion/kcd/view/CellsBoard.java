@@ -72,8 +72,8 @@ public class CellsBoard extends Application {
 
         private void createElements(Board board) {
             tilePane.getChildren().clear();
-            for (int i = 0; i < columns; i++) {
-                for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
                     tilePane.getChildren().add(createElement(board.getState(i, j)));
                 }
             }
