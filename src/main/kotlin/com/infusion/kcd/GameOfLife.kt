@@ -11,9 +11,6 @@ fun main(args: Array<String>) {
     val columns = 22;
     val board = Board(rows, columns)
     val threshold = 0.4
-//    board.setState(2, 3, State.ALIVE)
-//    board.setState(2, 4, State.ALIVE)
-//    board.setState(2, 5, State.ALIVE)
 
     val random = Random()
     for (i in 0..rows - 1) {
