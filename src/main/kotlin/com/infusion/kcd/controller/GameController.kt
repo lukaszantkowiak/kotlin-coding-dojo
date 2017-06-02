@@ -5,27 +5,24 @@ import com.infusion.kcd.model.State
 import com.infusion.kcd.view.CellsBoard
 
 class GameController(initialBoard: Board) {
-    private val WAIT_TIME = 100L
+    private val WAIT_TIME = 150L
 
-    private var board = initialBoard;
+    private var board = initialBoard
+    private lateinit var cellsBoard: CellsBoard
 
     fun start() {
-        val cellsBoard = CellsBoard.getInstance();
-        cellsBoard.updateState(board)
+        cellsBoard = CellsBoard.getInstance();
+        refreshUI()
         waitForNextIteration()
-        startSimulation(cellsBoard);
+        startSimulation()
     }
 
-    private fun startSimulation(cellsBoard: CellsBoard) {
+    private fun startSimulation() {
         while (isAliveCell()) {
             simulateNextStep()
-            refreshUI(cellsBoard)
+            refreshUI()
             waitForNextIteration()
         }
-    }
-
-    private fun refreshUI(cellsBoard: CellsBoard) {
-        cellsBoard.updateState(board)
     }
 
     internal fun simulateNextStep() {
@@ -81,6 +78,10 @@ class GameController(initialBoard: Board) {
 
     private fun waitForNextIteration() {
         Thread.sleep(WAIT_TIME)
+    }
+
+    private fun refreshUI() {
+        cellsBoard.updateState(board)
     }
 }
 
